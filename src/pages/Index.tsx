@@ -18,20 +18,21 @@ const T = {
 
 const slides = [
   { id: 1, type: "title" },
-  { id: 2, type: "relevance" },
-  { id: 3, type: "definition" },
-  { id: 4, type: "principles" },
-  { id: 5, type: "sources" },
-  { id: 6, type: "subjects" },
-  { id: 7, type: "objects" },
-  { id: 8, type: "nonproperty" },
-  { id: 9, type: "protection" },
-  { id: 10, type: "timeline" },
-  { id: 11, type: "conclusion" },
+  { id: 2, type: "title2" },
+  { id: 3, type: "relevance" },
+  { id: 4, type: "definition" },
+  { id: 5, type: "principles" },
+  { id: 6, type: "sources" },
+  { id: 7, type: "subjects" },
+  { id: 8, type: "objects" },
+  { id: 9, type: "nonproperty" },
+  { id: 10, type: "protection" },
+  { id: 11, type: "timeline" },
+  { id: 12, type: "conclusion" },
 ];
 
 const slideNames: Record<string, string> = {
-  title: "Титул", relevance: "Актуальность", definition: "Понятие",
+  title: "Титул 1", title2: "Титул 2", relevance: "Актуальность", definition: "Понятие",
   principles: "Принципы", sources: "Источники", subjects: "Субъекты",
   objects: "Объекты", nonproperty: "Неимущественные", protection: "Защита",
   timeline: "Шкала", conclusion: "Вывод",
@@ -74,6 +75,49 @@ const SlideTitle = () => (
       <div className="flex items-center justify-center gap-0">
         {[
           { label: "Авторы", value: "Поваров М.К. · Исмазиева А.Г." },
+          null,
+          { label: "Научный руководитель", value: "Шеремеев Е.Е." },
+          null,
+          { label: "Место и год", value: "Самара · 2026" },
+        ].map((item, i) =>
+          item === null
+            ? <div key={i} style={{ width: 1, height: "4vw", background: T.border, margin: "0 2vw" }} />
+            : (
+              <div key={i} className="text-center" style={{ padding: "1.2vw 2vw", background: "rgba(255,255,255,0.75)", border: `1px solid ${T.border}`, borderRadius: "1vw" }}>
+                <p className="font-montserrat uppercase tracking-widest" style={{ fontSize: "clamp(0.55rem,0.8vw,0.75rem)", color: T.muted, marginBottom: 4 }}>{item.label}</p>
+                <p className="font-montserrat font-bold" style={{ fontSize: "clamp(0.85rem,1.5vw,1.25rem)", color: T.text }}>{item.value}</p>
+              </div>
+            )
+        )}
+      </div>
+    </div>
+  </div>
+);
+
+// ── Slide 1b: Title (один автор) ─────────────────────────────────────────────
+const SlideTitle2 = () => (
+  <div className="relative w-full h-full flex flex-col items-center justify-center overflow-hidden">
+    <img src={HERO_IMG} alt="" className="absolute inset-0 w-full h-full object-cover" style={{ opacity: 0.08 }} />
+    <div className="absolute inset-0" style={{ background: "linear-gradient(135deg,#EEF2FF 0%,#DBEAFE 55%,#ECFDF5 100%)" }} />
+    <div className="absolute" style={{ top: "5%", left: "4%", width: "18%", aspectRatio: "1", border: `2px solid ${T.a1}18`, borderRadius: "24%", transform: "rotate(15deg)" }} />
+    <div className="absolute" style={{ bottom: "8%", right: "5%", width: "24%", aspectRatio: "1", border: `1px solid ${T.a2}18`, borderRadius: "50%" }} />
+    <div className="absolute" style={{ top: "35%", right: "12%", width: "8%", aspectRatio: "1", background: `${T.a1}0E`, borderRadius: "30%", transform: "rotate(45deg)" }} />
+
+    <div className="relative z-10 text-center" style={{ padding: "0 8%" }}>
+      <h1 className="font-oswald font-bold" style={{ fontSize: "clamp(2.2rem,6vw,5rem)", color: T.text, lineHeight: 1.05, marginBottom: "1%" }}>
+        ГРАЖДАНСКОЕ ПРАВО
+      </h1>
+      <div className="flex items-center justify-center gap-3" style={{ marginBottom: "1%" }}>
+        <div style={{ height: 2, flex: 1, maxWidth: "10%", borderRadius: 2, background: `linear-gradient(to right,transparent,${T.a2})` }} />
+        <span className="font-montserrat font-semibold uppercase tracking-widest" style={{ fontSize: "clamp(0.75rem,1.4vw,1.1rem)", color: T.a2 }}>как основа регулирования</span>
+        <div style={{ height: 2, flex: 1, maxWidth: "10%", borderRadius: 2, background: `linear-gradient(to left,transparent,${T.a2})` }} />
+      </div>
+      <h2 className="font-oswald font-light" style={{ fontSize: "clamp(1.3rem,3.5vw,3rem)", color: T.a1, marginBottom: "5%" }}>
+        ЧАСТНЫХ ПРАВООТНОШЕНИЙ
+      </h2>
+      <div className="flex items-center justify-center gap-0">
+        {[
+          { label: "Автор", value: "Поваров М.К." },
           null,
           { label: "Научный руководитель", value: "Шеремеев Е.Е." },
           null,
@@ -490,7 +534,7 @@ const SlideConclusion = () => (
 
 // ── Slide map ────────────────────────────────────────────────────────────────
 const slideComponents: Record<string, React.FC> = {
-  title: SlideTitle, relevance: SlideRelevance, definition: SlideDefinition,
+  title: SlideTitle, title2: SlideTitle2, relevance: SlideRelevance, definition: SlideDefinition,
   principles: SlidePrinciples, sources: SlideSources, subjects: SlideSubjects,
   objects: SlideObjects, nonproperty: SlideNonProperty, protection: SlideProtection,
   timeline: SlideTimeline, conclusion: SlideConclusion,
